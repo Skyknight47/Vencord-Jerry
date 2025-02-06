@@ -19,6 +19,9 @@ importers:
       '@intrnl/xxhash64':
         specifier: ^0.1.2
         version: 0.1.2
+      '@odiffey/discord-markdown':
+        specifier: ^3.3.0
+        version: 3.3.0(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       '@sapphi-red/web-noise-suppressor':
         specifier: 0.3.5
         version: 0.3.5
@@ -589,6 +592,15 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
+  '@khanacademy/perseus-core@1.5.0':
+    resolution: {integrity: sha512-QR9tGBr8nAUFuARSbzgzL6ZkyjDur0Cz9tgQREjC0L+Sug5aj0DHuK86lhosZAbtgAzitX3KVRAsOMbKqU2fYg==}
+
+  '@khanacademy/simple-markdown@0.12.1':
+    resolution: {integrity: sha512-GnrK+mxULyO58pWjPQSU1bVUd892teNIzf7stdBB9mucFDXk2TiplPD9BJDUZ10uGfliyDVKlvwV3BIjHPhL5g==}
+    peerDependencies:
+      react: 16.14.0
+      react-dom: 16.14.0
+
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -600,6 +612,9 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@odiffey/discord-markdown@3.3.0':
+    resolution: {integrity: sha512-NdJAN9LC6K35TYI5/5Y8zJE5BJS4T5UZWChyVQ5ZTq5igreCu136eZJMo/c4Z/VVhvsuoyC7R7S88I0CBvbIug==}
 
   '@puppeteer/browsers@2.6.1':
     resolution: {integrity: sha512-aBSREisdsGH890S2rQqK82qmQYU3uFpSH8wcZWHgHzl3LfzsxAKbLNiAG9mO8v1Y0UICBeClICxPJvyr0rcuxg==}
@@ -1731,6 +1746,10 @@ packages:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
 
+  highlight.js@11.11.1:
+    resolution: {integrity: sha512-Xwwo44whKBVCYoliBQwaPvtd/2tYFkRQtXDWj1nackaV2JPXx3L0+Jvd8/qCJ2p+ML0/XVkJ2q+Mr+UVdpJK5w==}
+    engines: {node: '>=12.0.0'}
+
   highlight.js@11.7.0:
     resolution: {integrity: sha512-1rRqesRFhMO/PRF+G86evnyJkCgaZFOI+Z6kdj15TA18funfoqJXvgPCLSf0SWq3SRfg1j3HlDs8o4s3EGq1oQ==}
     engines: {node: '>=12.0.0'}
@@ -2336,8 +2355,17 @@ packages:
   queue-tick@1.0.1:
     resolution: {integrity: sha512-kJt5qhMxoszgU/62PLP1CJytzd2NKetjSRnyuj31fDd3Rlcz3fzlFdFLD1SItunPwyqEOkca6GbV612BWfaBag==}
 
+  react-dom@16.14.0:
+    resolution: {integrity: sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw==}
+    peerDependencies:
+      react: ^16.14.0
+
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+
+  react@16.14.0:
+    resolution: {integrity: sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==}
+    engines: {node: '>=0.10.0'}
 
   reflect.getprototypeof@1.0.9:
     resolution: {integrity: sha512-r0Ay04Snci87djAsI4U+WNRcSw5S4pOH7qFjd/veA5gC7TbqESR3tcj28ia95L/fYUDw11JKP7uqUKUAfVvV5Q==}
@@ -2420,6 +2448,9 @@ packages:
 
   safe-regex@1.1.0:
     resolution: {integrity: sha512-aJXcif4xnaNUzvUuC5gcb46oTS7zvg4jpMTnuqtrEPlR3vFr4pxtdTwaF1Qs3Enjn9HK+ZlwQui+a7z0SywIzg==}
+
+  scheduler@0.19.1:
+    resolution: {integrity: sha512-n/zwRWRYSUj0/3g/otKDRPMh6qv2SYMWNq85IEa8iZyAv8od9zDYpGSnpBEjNgcMNq6Scbu5KfIPxNF72R/2EA==}
 
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
@@ -3108,6 +3139,14 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
+  '@khanacademy/perseus-core@1.5.0': {}
+
+  '@khanacademy/simple-markdown@0.12.1(react-dom@16.14.0(react@16.14.0))(react@16.14.0)':
+    dependencies:
+      '@khanacademy/perseus-core': 1.5.0
+      react: 16.14.0
+      react-dom: 16.14.0(react@16.14.0)
+
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
       '@nodelib/fs.stat': 2.0.5
@@ -3119,6 +3158,14 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
+
+  '@odiffey/discord-markdown@3.3.0(react-dom@16.14.0(react@16.14.0))(react@16.14.0)':
+    dependencies:
+      '@khanacademy/simple-markdown': 0.12.1(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
+      highlight.js: 11.11.1
+    transitivePeerDependencies:
+      - react
+      - react-dom
 
   '@puppeteer/browsers@2.6.1':
     dependencies:
@@ -4546,6 +4593,8 @@ snapshots:
     dependencies:
       function-bind: 1.1.2
 
+  highlight.js@11.11.1: {}
+
   highlight.js@11.7.0: {}
 
   homedir-polyfill@1.0.3:
@@ -5149,7 +5198,21 @@ snapshots:
 
   queue-tick@1.0.1: {}
 
+  react-dom@16.14.0(react@16.14.0):
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+      prop-types: 15.8.1
+      react: 16.14.0
+      scheduler: 0.19.1
+
   react-is@16.13.1: {}
+
+  react@16.14.0:
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+      prop-types: 15.8.1
 
   reflect.getprototypeof@1.0.9:
     dependencies:
@@ -5244,6 +5307,11 @@ snapshots:
   safe-regex@1.1.0:
     dependencies:
       ret: 0.1.15
+
+  scheduler@0.19.1:
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
 
   semver@6.3.1: {}
 
