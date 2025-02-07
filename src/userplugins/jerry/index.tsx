@@ -66,41 +66,41 @@ async function initializeTranscript(channelId) {
 
 
     const messages = MessageStore.getMessages(channelId);
-        messages.forEach(msg => {
-            var authorNick = GuildMemberStore.getNick(myGuildId, msg.author.id);
-            var nicknameOrUsername;
-            var clonedMsgContent = msg.content;
-            if (authorNick !== null && authorNick !== undefined) {
-                nicknameOrUsername = `${authorNick} (${msg.author.username})`;
-            } else {
-                nicknameOrUsername = msg.author.username;
-            }
+    messages.forEach(msg => {
+        var authorNick = GuildMemberStore.getNick(myGuildId, msg.author.id);
+        var nicknameOrUsername;
+        var clonedMsgContent = msg.content;
+        if (authorNick !== null && authorNick !== undefined) {
+            nicknameOrUsername = `${authorNick} (${msg.author.username})`;
+        } else {
+            nicknameOrUsername = msg.author.username;
+        }
 
-            if (msg.embeds.length !== 0) {
-                if (msg.author.bot === true) {
-                    tempcolor = msg.embeds[0].color;
-                    console.log(msg.embeds[0]);
-                    if (msg.embeds[0].fields.length !== 0) {
-                        clonedMsgContent = clonedMsgContent.replace(
-                            /<@!?(\d+)>/g,
-                            (match, p1) => `<font color="#5F7C8A">@${UserStore.getUser(p1).username}</font>`,
-                        );
-                        console.log(GuildStore.getGuild(myGuildId));
-                        clonedMsgContent = clonedMsgContent.replace(
-                            /<@&(\d+)>/g,
-                            (match, p1) => `<font color="${GuildStore.getRole(myGuildId, p1).colorString}">${GuildStore.getRole(myGuildId, p1).name}</font>`,
-                        );
-                        clonedMsgContent = clonedMsgContent.replace(
-                            /<#(\d+)>/g,
-                            (match, p1) => `#${getChannel(p1).name}`,
-                        );
-                        clonedMsgContent = clonedMsgContent.replace(
-                            /\\n/g,
-                            (match, p1) => "<br></br>",
-                        );
-                        var fieldAddedTranscriptEmbedObject;
-                        console.log(msg);
-                        var transcriptEmbedObject = `<div class="message"> <img
+        if (msg.embeds.length !== 0) {
+            if (msg.author.bot === true) {
+                tempcolor = msg.embeds[0].color;
+                console.log(msg.embeds[0]);
+                if (msg.embeds[0].fields.length !== 0) {
+                    // clonedMsgContent = clonedMsgContent.replace(
+                    //     /<@!?(\d+)>/g,
+                    //     (match, p1) => `<font color="#5F7C8A">@${UserStore.getUser(p1).username}</font>`,
+                    // );
+                    // console.log(GuildStore.getGuild(myGuildId));
+                    // clonedMsgContent = clonedMsgContent.replace(
+                    //     /<@&(\d+)>/g,
+                    //     (match, p1) => `<font color="${GuildStore.getRole(myGuildId, p1).colorString}">${GuildStore.getRole(myGuildId, p1).name}</font>`,
+                    // );
+                    // clonedMsgContent = clonedMsgContent.replace(
+                    //     /<#(\d+)>/g,
+                    //     (match, p1) => `#${getChannel(p1).name}`,
+                    // );
+                    clonedMsgContent = clonedMsgContent.replace(
+                        /\\n/g,
+                        (match, p1) => "<br></br>",
+                    );
+                    var fieldAddedTranscriptEmbedObject;
+                    console.log(msg);
+                    var transcriptEmbedObject = `<div class="message"> <img
         src=https://cdn.discordapp.com/attachments/639980539960492043/923711923298660412/BA_bot.png>
         <h2> <span class="sender-name">${nicknameOrUsername}</span> <span
             class="message-time">${msg.timestamp}</span> </h2>
@@ -114,105 +114,106 @@ async function initializeTranscript(channelId) {
             <div class="embed-description">${msg.embeds[0].rawDescription || ""}</div>
             <div class="fields">
           `;
-                        msg.embeds.MessageEmbed.fields.forEach(fieldObject => {
-                            var STA = `<div class="">
+                    msg.embeds.MessageEmbed.fields.forEach(fieldObject => {
+                        var STA = `<div class="">
                 <div class="field-title">${fieldObject.name}</div>
                 <div class="field-content">${fieldObject.value}</div>`;
-                            fieldAddedTranscriptEmbedObject = transcriptEmbedObject.concat(String(STA));
-                        });
+                        fieldAddedTranscriptEmbedObject = transcriptEmbedObject.concat(String(STA));
+                    });
 
-                        var completedEmbed = fieldAddedTranscriptEmbedObject.concat(`</div>
+                    var completedEmbed = fieldAddedTranscriptEmbedObject.concat(`</div>
               </div>`);
-                        channelText.push(completedEmbed);
+                    channelText.push(completedEmbed);
+                } else {
+                    // clonedMsgContent = clonedMsgContent.replace(
+                    //     /<@!?(\d+)>/g,
+                    //     (match, p1) => `<font color="#5F7C8A">@${UserStore.getUser(p1).username}</font>`,
+                    // );
+                    // console.log(GuildStore.getGuild(myGuildId));
+                    // clonedMsgContent = clonedMsgContent.replace(
+                    //     /<@&(\d+)>/g,
+                    //     (match, p1) => `<font color="${GuildStore.getRole(myGuildId, p1).colorString}">${GuildStore.getRole(myGuildId, p1).name}</font>`,
+                    // );
+                    // clonedMsgContent = clonedMsgContent.replace(
+                    //     /<#(\d+)>/g,
+                    //     (match, p1) => `#${getChannel(p1).name}`,
+                    // );
+                    clonedMsgContent = clonedMsgContent.replace(
+                        /\\n/g,
+                        (match, p1) => "<br></br>",
+                    );
+
+                    var authorFound;
+                    if (msg.embeds[0].author !== null) {
+                        authorFound = msg.embeds[0].author;
                     } else {
-                        clonedMsgContent = clonedMsgContent.replace(
-                            /<@!?(\d+)>/g,
-                            (match, p1) => `<font color="#5F7C8A">@${UserStore.getUser(p1).username}</font>`,
-                        );
-                        console.log(GuildStore.getGuild(myGuildId));
-                        clonedMsgContent = clonedMsgContent.replace(
-                            /<@&(\d+)>/g,
-                            (match, p1) => `<font color="${GuildStore.getRole(myGuildId, p1).colorString}">${GuildStore.getRole(myGuildId, p1).name}</font>`,
-                        );
-                        clonedMsgContent = clonedMsgContent.replace(
-                            /<#(\d+)>/g,
-                            (match, p1) => `#${getChannel(p1).name}`,
-                        );
-                        clonedMsgContent = clonedMsgContent.replace(
-                            /\\n/g,
-                            (match, p1) => "<br></br>",
-                        );
-
-                        var authorFound;
-                        if (msg.embeds[0].author !== null) {
-                            authorFound = msg.embeds[0].author;
-                        } else {
-                            authorFound = "";
-                        }
+                        authorFound = "";
+                    }
 
 
-                        var transcriptEmbedObject = `<div class="message"> <img
+                    var transcriptEmbedObject = `<div class="message"> <img
               src=https://cdn.discordapp.com/attachments/639980539960492043/923711923298660412/BA_bot.png>
               <h2> <span class="sender-name">${nicknameOrUsername}</span> <span
                   class="message-time">${msg.timestamp}</span> </h2>
               <div class="embed-container">
               <div class="embed">
                   <div class="author "> <img class="author-icon"
-                  src=${`https://cdn.discordapp.com/avatars/${authorFound.id}/${authorFound.avatar}.webp?size=80`|| ""}>
+                  src=${`https://cdn.discordapp.com/avatars/${authorFound.id}/${authorFound.avatar}.webp?size=80` || ""}>
                       <div class="author-name">${authorFound.name || ""}</div>
                   </div> <img class="thumbnail" src="${msg.embeds[0].thumbnail || ""}">
                   <div class="embed-title"> <span class="title">${msg.embeds[0].rawTitle || ""}</span> </div>
                   <div class="embed-description">${msg.embeds[0].rawDescription || ""}</div>
                   <div class="embed-color">
                 `;
-                        channelText.push(transcriptEmbedObject);
-                    }
+                    channelText.push(transcriptEmbedObject);
                 }
+            }
+        } else {
+
+            // clonedMsgContent = clonedMsgContent.replace(
+            //     /<@!?(\d+)>/g,
+            //     (match, p1) => `<font color="#5F7C8A">@${UserStore.getUser(p1).username}</font>`,
+            // );
+            // console.log(GuildStore.getGuild(myGuildId));
+            // clonedMsgContent = clonedMsgContent.replace(
+            //     /<@&(\d+)>/g,
+            //     (match, p1) => `<font color="${GuildStore.getRole(myGuildId, p1).colorString}">${GuildStore.getRole(myGuildId, p1).name}</font>`,
+            // );
+            // clonedMsgContent = clonedMsgContent.replace(
+            //     /<#(\d+)>/g,
+            //     (match, p1) => `#${getChannel(p1).name}`,
+            // );
+            clonedMsgContent = clonedMsgContent.replace(
+                /\\n/g,
+                (match, p1) => "<br></br>",
+            );
+            var botUrl;
+            if (msg.author.bot) {
+                botUrl = "https://cdn.discordapp.com/attachments/639980539960492043/923711923298660412/BA_bot.png";
             } else {
+                console.log(msg);
+                console.log(UserStore.getUser(msg.author.id));
+                botUrl = `https://cdn.discordapp.com/avatars/${msg.author.id}/${msg.author.avatar}.webp?size=80`;
 
-                clonedMsgContent = clonedMsgContent.replace(
-                    /<@!?(\d+)>/g,
-                    (match, p1) => `<font color="#5F7C8A">@${UserStore.getUser(p1).username}</font>`,
-                );
-                console.log(GuildStore.getGuild(myGuildId));
-                clonedMsgContent = clonedMsgContent.replace(
-                    /<@&(\d+)>/g,
-                    (match, p1) => `<font color="${GuildStore.getRole(myGuildId, p1).colorString}">${GuildStore.getRole(myGuildId, p1).name}</font>`,
-                );
-                clonedMsgContent = clonedMsgContent.replace(
-                    /<#(\d+)>/g,
-                    (match, p1) => `#${getChannel(p1).name}`,
-                );
-                clonedMsgContent = clonedMsgContent.replace(
-                    /\\n/g,
-                    (match, p1) => "<br></br>",
-                );
-                var botUrl;
-                if (msg.author.bot) {
-                    botUrl = "https://cdn.discordapp.com/attachments/639980539960492043/923711923298660412/BA_bot.png";
-                } else {
-                    console.log(msg);
-                    console.log(UserStore.getUser(msg.author.id));
-                    botUrl = `https://cdn.discordapp.com/avatars/${msg.author.id}/${msg.author.avatar}.webp?size=80`;
+            }
 
-                }
-
-                var transcriptMessageObject = `<div class="message"> <img
+            var transcriptMessageObject = `<div class="message"> <img
         src=${botUrl}>
     <h2> <span class="sender-name">${nicknameOrUsername}</span> <span
             class="message-time">${msg.timestamp}</span> </h2>
     <div>${toHTML(clonedMsgContent, {
-        discordCallback: {
-            user: node => `<font color="#5F7C8A">@${UserStore.getUser(node.id).username}</font>`,
-            role: node => `<font color="${GuildStore.getRole(myGuildId, node.id).colorString}">${GuildStore.getRole(myGuildId, node.id).name}</font>`,
-            channel: node => `<font color="#5F7C8A">#${getChannel(node.id).name}</font>`,
-        }
-    })}</div>
+                embed: true,
+                discordCallback: {
+                    user: node => `<font color="#5F7C8A">@${UserStore.getUser(node.id).username}</font>`,
+                    role: node => `<font color="${GuildStore.getRole(myGuildId, node.id).colorString}">@${GuildStore.getRole(myGuildId, node.id).name}</font>`,
+                    channel: node => `<font color="#5F7C8A">#${getChannel(node.id).name}</font>`,
+                }
+            })}</div>
     </div>`;
-                // <div>${clonedMsgContent}</div>
-                channelText.push(transcriptMessageObject);
-            }
-        });
+            // <div>${clonedMsgContent}</div>
+            channelText.push(transcriptMessageObject);
+        }
+    });
     channelText.sort((a, b) => a.createdTimestamp + b.createdTimestamp);
     console.log(tempcolor);
     var hexString = tempcolor;// .toString(16);
@@ -479,7 +480,7 @@ async function initializeTranscript(channelId) {
         {
             content: "*Transcript Saved ✅*",
             author: UserStore.getUser("643945264868098049"),
-            attachments:  undefined,
+            attachments: undefined,
         }
     );
     return;
@@ -537,14 +538,14 @@ const TranscriptButton: ChatBarButtonFactory = ({ isMainChat, type: { attachment
         <ChatBarButton
             tooltip="Transcript Channel"
             onClick={() => initializeTranscript(channelId)}
-                // sendBotMessage(
-                //     channelId,
-                //     {
-                //         content: getDraft(channelId),
-                //         author: UserStore.getCurrentUser(),
-                //         attachments: hasAttachments ? await getAttachments(channelId) : undefined,
-                //     }
-                // )}
+            // sendBotMessage(
+            //     channelId,
+            //     {
+            //         content: getDraft(channelId),
+            //         author: UserStore.getCurrentUser(),
+            //         attachments: hasAttachments ? await getAttachments(channelId) : undefined,
+            //     }
+            // )}
             buttonProps={{
                 style: {
                     translate: "0 2px"
