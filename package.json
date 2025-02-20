@@ -40,10 +40,12 @@
         "@sapphi-red/web-noise-suppressor": "0.3.5",
         "@vap/core": "0.0.12",
         "@vap/shiki": "0.10.5",
+        "discord-html-transcripts": "^3.2.0",
         "fflate": "^0.8.2",
         "gifenc": "github:mattdesl/gifenc#64842fca317b112a8590f8fef2bf3825da8f6fe3",
         "monaco-editor": "^0.52.2",
         "nanoid": "^5.0.9",
+        "pnpm": "^10.4.1",
         "virtual-merge": "^1.0.1"
     },
     "devDependencies": {

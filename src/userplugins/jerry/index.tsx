@@ -12,6 +12,7 @@ import definePlugin, { OptionType, StartAt } from "@utils/types";
 import { saveFile } from "@utils/web";
 import { findByPropsLazy } from "@webpack";
 import { GuildMemberStore, GuildStore, MessageStore, React, SelectedChannelStore, SelectedGuildStore, UserStore } from "@webpack/common";
+import { createTranscript, ExportReturnType } from "discord-html-transcripts";
 
 const settings = definePluginSettings({
     // enabled: {
@@ -57,6 +58,28 @@ function getChannel(channelId: string) {
 //         console.error("Error fetching messages:", error);
 //     }
 // }
+
+async function initializeTranscriptV2(channelId) {
+    const Channel = getChannel(channelId);
+    const attachment = await createTranscript(Channel, {
+        returnType: ExportReturnType.String,
+        saveImages: true,
+        poweredBy: false,
+        filename: `${channelId}-transcript.html`
+    });
+    // const file = new File([attachment], `ticket-transcript-${channelId}`, { type: "text/html" });
+    const file = new File([attachment], `ticket-transcript-${channelId}`, { type: "text/html" });
+
+    saveFile(file);
+    return sendBotMessage(
+        channelId,
+        {
+            content: "*Transcript Saved ✅*",
+            author: UserStore.getUser("643945264868098049"),
+            attachments: undefined,
+        }
+    );
+}
 
 async function initializeTranscript(channelId) {
     const channel = getChannel(channelId);
@@ -537,7 +560,7 @@ const TranscriptButton: ChatBarButtonFactory = ({ isMainChat, type: { attachment
     return (
         <ChatBarButton
             tooltip="Transcript Channel"
-            onClick={() => initializeTranscript(channelId)}
+            onClick={() => initializeTranscriptV2(channelId)}
             // sendBotMessage(
             //     channelId,
             //     {
